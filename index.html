@@ -1,0 +1,132 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The $8 Coffee v1</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--acc:#FF1493;--ink:#343434;--mut:#6B6B6B;--ctx:#D3D3D3;--bg:#FFFFF0;--tip:#343434;--tipink:#FFFFF0}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--ink:#F2F2EA;--mut:#A8A8A0;--ctx:#4A4A46;--bg:#1E1E1C;--tip:#F2F2EA;--tipink:#1E1E1C}}
+:root[data-theme="dark"]{--ink:#F2F2EA;--mut:#A8A8A0;--ctx:#4A4A46;--bg:#1E1E1C;--tip:#F2F2EA;--tipink:#1E1E1C}
+*{box-sizing:border-box} html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,Helvetica,Arial,sans-serif}
+section{min-height:100vh;padding:72px 16px;display:flex;flex-direction:column;justify-content:center;border-bottom:1px solid var(--ctx)}
+.in{max-width:1000px;margin:0 auto;width:100%}
+.kick{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);font-weight:700;margin:0 0 14px}
+h1{font-size:48px;line-height:1.08;margin:0 0 16px} h2{font-size:30px;line-height:1.2;margin:0 0 10px}
+p{font-size:19px;line-height:1.5;margin:0 0 12px} .mut{color:var(--mut)} .acc{color:var(--acc)}
+.small{font-size:12px;color:var(--mut);line-height:1.5}
+.huge{font-size:clamp(96px,22vw,220px);font-weight:700;line-height:.9;margin:0}
+.cue{margin-top:40px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
+svg{width:100%;height:auto;display:block;overflow:visible} svg text{font-family:Inter,Helvetica,Arial,sans-serif}
+#tip{position:fixed;pointer-events:none;background:var(--tip);color:var(--tipink);font-size:12px;line-height:1.5;padding:9px 11px;border-radius:6px;opacity:0;transition:opacity .1s;max-width:260px;z-index:9}
+#tip b{font-size:14px}
+blockquote{margin:0 0 18px;font-size:30px;line-height:1.3;font-weight:700;border-left:3px solid var(--acc);padding-left:20px}
+blockquote cite{display:block;font-size:12px;font-weight:400;color:var(--mut);font-style:normal;margin-top:10px}
+.quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:28px}
+.quotes blockquote{font-size:19px;font-weight:400;border-left:2px solid var(--ctx)}
+.note{border-top:1px solid var(--ctx);margin-top:22px;padding-top:12px}
+.note p{font-size:15px} .missing{border:1px dashed var(--mut);border-radius:8px;padding:14px 16px;margin-top:22px}
+.missing p{font-size:15px;margin:0}
+.ask{border:2px solid var(--acc);border-radius:12px;padding:26px 26px 18px}
+.calc{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin:22px 0}
+.calc label{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);font-weight:700;display:block;margin-bottom:8px}
+.calc output{font-size:30px;font-weight:700;display:block;margin-bottom:8px}
+input[type=range]{width:100%;accent-color:var(--acc)}
+.result{font-size:clamp(48px,9vw,96px);font-weight:700;line-height:1;margin:6px 0}
+.receipt{max-width:460px;font-variant-numeric:tabular-nums;border-top:2px dashed var(--mut);border-bottom:2px dashed var(--mut);padding:14px 0}
+.receipt .row{display:flex;justify-content:space-between;font-size:19px;padding:8px 0;opacity:0;transform:translateY(8px);transition:opacity .6s ease,transform .6s ease}
+.receipt.on .row{opacity:1;transform:none}
+.receipt .row.beans{color:var(--acc);font-weight:700}
+.receipt .row.total{border-top:1px solid var(--ctx);font-weight:700;margin-top:6px}
+@media (prefers-reduced-motion: reduce){.receipt .row{transition:none;opacity:1;transform:none}}
+footer{padding:40px 16px 60px} footer .in p{font-size:12px;color:var(--mut)}
+@media (max-width:700px){h1{font-size:30px}h2{font-size:19px}blockquote{font-size:19px}.quotes,.calc{grid-template-columns:1fr}}
+</style></head><body>
+<section id="hook"><div class="in"><p class="kick">1 · The $8 coffee · a campaign for New School students</p>
+<p class="huge">$8.00</p><h1 style="margin-top:18px">Only <span class="acc">37¢</span> of it is coffee.</h1>
+<p class="mut">So what are you paying for?</p><p class="cue">Scroll ↓</p></div></section>
+
+<section id="context"><div class="in"><p class="kick">2 · Context</p><h2>Coffee beans did get expensive, before your latte did</h2>
+<p class="mut">Average US price of a pound of ground coffee, 2020–2026. Pink: the year my usual order went from $6 to $8. Hover to see any month.</p>
+<svg id="line"></svg><p class="small">Source: BLS Average Price, Ground Coffee (APU0000717311), via FRED. Oct 2025 not published.</p></div></section>
+
+<section id="ev1"><div class="in"><p class="kick">3 · Evidence I</p><h2>My latte rose 33%. The beans inside it rose 2%.</h2>
+<p class="mut">Price change over the same year, fall 2025 → fall 2026. Hover a bar for its source.</p>
+<svg id="rise"></svg><div class="note"><p><b>What I counted:</b> five prices, about 12 months apart. <b>Divided by:</b> each new price ÷ old price. <b>Missing:</b> café rent increases, which are private.</p></div></div></section>
+
+<section id="ev2"><div class="in"><p class="kick">4 · Evidence II</p><h2>Only 37¢ of an $8 latte is coffee</h2>
+<p class="mut">Where an $8 latte goes, using a typical café's costs. Hover a slice.</p><svg id="split"></svg>
+<div class="missing"><p><b>What we can't see:</b> Blank Street's real rent, wholesale bean price and profit. They are private, so this uses an industry average.</p></div></div></section>
+
+<section id="turn"><div class="in"><p class="kick">5 · The turn</p><h2>A year of coffee costs over $1,000. The coffee in it costs about $100.</h2>
+<p class="mut">Three people I interviewed, their yearly coffee spend (grey) and the beans inside it (pink).</p><svg id="year"></svg>
+<div class="quotes"><blockquote>“I would feel scammed and sad. But I wouldn't change my habits.”<cite>Emilia, Parsons</cite></blockquote>
+<blockquote>“You're paying for the whole experience.”<cite>Valentina, Fordham</cite></blockquote>
+<blockquote>“I'm paying way too much… a very big margin for the coffee shop.”<cite>Antonio, works in NYC</cite></blockquote></div></div></section>
+
+<section id="ask"><div class="in"><div class="ask"><p class="kick acc">6 · The ask</p><h2>Before your next $8 coffee, open your coffee app and check your yearly total.</h2>
+<p>Then decide if the experience is worth it. If it is, keep going, knowingly. If it isn't, try a cheaper coffee two days a week.</p></div></div></section>
+<footer><div class="in"><p><b>Sources.</b> Coffee bean prices: US Bureau of Labor Statistics, Average Price: Coffee, 100% Ground Roast (APU0000717311), via FRED; Oct 2025 not published. NYC eating-out prices: BLS CPI Food Away From Home, New York-Newark-Jersey City (CUURA101SEFV), via FRED. Minimum wage: ny.gov. Café cost shares: Bellwether Coffee sample café P&amp;L, applied to $8 (an industry average, not Blank Street's real costs, which are private). Interviews: Emilia (Parsons), Valentina (Fordham), Antonio (works in NYC), Nov 2026, self-reported. One latte = 18 g of coffee. All accessed Nov 2026.</p>
+<p>Silvana Leyva · PUDM 2700 · Final Project Phase 3 · version 1 · built with Claude from my storyboard, data and style guide.</p></div></footer><div id="tip"></div>
+<script>
+const COFFEE=[["2020-01", 4.174], ["2020-02", 4.25], ["2020-03", 4.334], ["2020-04", 4.396], ["2020-05", 4.466], ["2020-06", 4.517], ["2020-07", 4.536], ["2020-08", 4.504], ["2020-09", 4.487], ["2020-10", 4.522], ["2020-11", 4.485], ["2020-12", 4.52], ["2021-01", 4.591], ["2021-02", 4.673], ["2021-03", 4.671], ["2021-04", 4.752], ["2021-05", 4.566], ["2021-06", 4.605], ["2021-07", 4.562], ["2021-08", 4.726], ["2021-09", 4.733], ["2021-10", 4.8], ["2021-11", 4.816], ["2021-12", 4.965], ["2022-01", 5.135], ["2022-02", 5.247], ["2022-03", 5.41], ["2022-04", 5.529], ["2022-05", 5.835], ["2022-06", 5.793], ["2022-07", 6.112], ["2022-08", 6.235], ["2022-09", 6.17], ["2022-10", 6.408], ["2022-11", 6.356], ["2022-12", 6.465], ["2023-01", 6.358], ["2023-02", 6.351], ["2023-03", 6.184], ["2023-04", 6.04], ["2023-05", 6.094], ["2023-06", 6.091], ["2023-07", 6.141], ["2023-08", 6.091], ["2023-09", 6.085], ["2023-10", 6.178], ["2023-11", 6.169], ["2023-12", 6.092], ["2024-01", 6.124], ["2024-02", 6.094], ["2024-03", 5.964], ["2024-04", 6.063], ["2024-05", 5.991], ["2024-06", 6.253], ["2024-07", 6.307], ["2024-08", 6.311], ["2024-09", 6.47], ["2024-10", 6.644], ["2024-11", 6.868], ["2024-12", 6.776], ["2025-01", 7.019], ["2025-02", 7.246], ["2025-03", 7.385], ["2025-04", 7.536], ["2025-05", 7.931], ["2025-06", 8.132], ["2025-07", 8.414], ["2025-08", 8.872], ["2025-09", 9.139], ["2025-10", null], ["2025-11", 9.258], ["2025-12", 9.053], ["2026-01", 9.366], ["2026-02", 9.459], ["2026-03", 9.608], ["2026-04", 9.723], ["2026-05", 9.511], ["2026-06", 9.457], ["2026-07", 9.317], ["2026-08", 9.299], ["2026-09", 9.332], ["2026-10", 9.249]]; const NS='http://www.w3.org/2000/svg';
+const tip=document.getElementById('tip');
+function showTip(e,html){tip.innerHTML=html;tip.style.opacity=1;const w=tip.offsetWidth;tip.style.left=(e.clientX+14+w>innerWidth?e.clientX-w-14:e.clientX+14)+'px';tip.style.top=(e.clientY+14)+'px';}
+function hideTip(){tip.style.opacity=0;}
+function mk(svg,t,a,txt){const el=document.createElementNS(NS,t);for(const k in a)el.setAttribute(k,a[k]);if(txt!=null)el.textContent=txt;svg.appendChild(el);return el;}
+const perCup=v=>v*18/453.6;
+function lineChart(id){
+ const svg=document.getElementById(id),W=1000,H=420,L=56,R=90,T=20,B=40;svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
+ const n=COFFEE.length,x=i=>L+(W-L-R)*i/(n-1),y=v=>T+(H-T-B)*(1-v/10);
+ const i0=COFFEE.findIndex(d=>d[0]==='2025-09'),i1=COFFEE.findIndex(d=>d[0]==='2026-09');
+ mk(svg,'rect',{x:x(i0),y:T,width:x(i1)-x(i0),height:H-T-B,fill:'var(--acc)',opacity:.08});
+ [0,5,10].forEach(g=>{mk(svg,'line',{x1:L,x2:W-R,y1:y(g),y2:y(g),stroke:'var(--ctx)'});mk(svg,'text',{x:L-10,y:y(g)+4,'font-size':12,fill:'var(--mut)','text-anchor':'end'},'$'+g);});
+ for(let yr=2020;yr<=2026;yr++){mk(svg,'text',{x:x((yr-2020)*12),y:H-12,'font-size':12,fill:'var(--mut)','text-anchor':'middle'},yr);}
+ const path=(sel,col,w)=>{let d='',pen=false;COFFEE.forEach((p,i)=>{if(!sel(p[0])||p[1]==null){pen=false;return;}d+=(pen?'L':'M')+x(i)+','+y(p[1]);pen=true;});mk(svg,'path',{d,fill:'none',stroke:col,'stroke-width':w,'stroke-linejoin':'round','stroke-linecap':'round'});};
+ path(d=>d<='2025-09','var(--ink)',2.5); path(d=>d>='2025-09','var(--acc)',4);
+ const lab=(dt,t,anchor,dx,dy,bold)=>{const i=COFFEE.findIndex(d=>d[0]===dt),v=COFFEE[i][1];mk(svg,'circle',{cx:x(i),cy:y(v),r:5,fill:bold?'var(--acc)':'var(--ink)'});mk(svg,'text',{x:x(i)+dx,y:y(v)+dy,'font-size':19,fill:'var(--ink)','text-anchor':anchor,'font-weight':bold?700:400},t);};
+ lab('2020-01','$4.17','start',4,-18,false); lab('2025-09','$9.14','end',-10,-14,true); lab('2026-09','$9.33','start',12,-10,true);
+ mk(svg,'text',{x:(x(i0)+x(i1))/2,y:y(9.3)+56,'font-size':19,'font-weight':700,fill:'var(--ink)','text-anchor':'middle'},'+2%');
+ const cross=mk(svg,'line',{y1:T,y2:H-B,stroke:'var(--mut)','stroke-dasharray':'3 3',opacity:0});
+ const hit=mk(svg,'rect',{x:L,y:T,width:W-L-R,height:H-T-B,fill:'transparent'});
+ hit.addEventListener('mousemove',e=>{const r=svg.getBoundingClientRect(),px=(e.clientX-r.left)*W/r.width;let i=Math.round((px-L)/(W-L-R)*(n-1));i=Math.max(0,Math.min(n-1,i));const p=COFFEE[i];cross.setAttribute('x1',x(i));cross.setAttribute('x2',x(i));cross.setAttribute('opacity',1);
+  const [yy,mm]=p[0].split('-');const mon=new Date(+yy,+mm-1).toLocaleString('en-US',{month:'short',year:'numeric'});
+  showTip(e,p[1]==null?`<b>${mon}</b><br>not published`:`<b>${mon}</b><br>$${p[1].toFixed(2)} per pound<br>≈ ${(perCup(p[1])*100).toFixed(0)}¢ of coffee in one latte`);});
+ hit.addEventListener('mouseleave',()=>{hideTip();cross.setAttribute('opacity',0);});
+}
+function barChart(id,rows,hiIdx){
+ const svg=document.getElementById(id),W=1000,rowH=64,L=340,R=90,H=rowH*rows.length+10,max=36;svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
+ const x=v=>L+(W-L-R)*v/max;
+ rows.forEach((r,i)=>{const y=i*rowH,hi=i===hiIdx;
+  mk(svg,'text',{x:L-14,y:y+28,'font-size':19,fill:'var(--ink)','text-anchor':'end','font-weight':hi?700:400},r[0]);
+  mk(svg,'text',{x:L-14,y:y+46,'font-size':12,fill:'var(--mut)','text-anchor':'end'},r[1]);
+  mk(svg,'rect',{x:L,y:y+12,width:Math.max(3,x(r[2])-L),height:30,rx:4,fill:hi||i===1&&rows[1][2]>30?(hi?'var(--acc)':'var(--ctx)'):'var(--ctx)'});
+  mk(svg,'text',{x:x(r[2])+10,y:y+33,'font-size':19,fill:'var(--ink)','font-weight':hi?700:400},'+'+(r[2]>=10?r[2].toFixed(0):r[2].toFixed(1))+'%');
+  const h=mk(svg,'rect',{x:0,y:y,width:W,height:rowH,fill:'transparent'});
+  h.addEventListener('mousemove',e=>showTip(e,`<b>${r[0]}</b><br>${r[3]}<br>Source: ${r[4]}`));h.addEventListener('mouseleave',hideTip);});
+ mk(svg,'line',{x1:L,x2:L,y1:0,y2:H-10,stroke:'var(--ink)'});
+}
+const RISE=[["My usual Blank Street order","self-reported",33.3,"$6 → $8, fall 2025 → fall 2026","my own purchases"],
+ ["A friend's campus latte","interview, self-reported",33.3,"$3 → $4","interview with Valentina, Nov 2026"],
+ ["Eating & drinking out in NYC","BLS price index",3.6,"Sep 2025 → Sep 2026","BLS CPI Food Away From Home, NY area"],
+ ["NYC minimum wage","NY State",3.0,"$16.50 → $17.00, Jan 2026","ny.gov"],
+ ["Coffee beans, per pound","BLS average price",2.1,"$9.14 → $9.33, Sep 2025 → Sep 2026","BLS Average Price, Ground Coffee"]];
+const SPLIT=[["Coffee beans",0.37,true,"18 g × $9.33/lb (BLS, Sep 2026)"],["Milk, cup & other ingredients",2.03,false,"rest of the 30% ingredient share"],["Staff",2.40,false,"30% (typical café)"],["Rent",0.96,false,"12% (typical café)"],["Other costs",0.72,false,"9% (typical café)"],["Profit",1.52,false,"19% (typical café)"]];
+function splitChart(id){
+ const svg=document.getElementById(id),W=1000,H=250;svg.setAttribute('viewBox',`0 0 ${W} ${H}`);let x=0;
+ SPLIT.forEach((s,k)=>{const w=W*s[1]/8;mk(svg,'rect',{x:x+1,y:30,width:Math.max(w-2,4),height:90,rx:3,fill:s[2]?'var(--acc)':'var(--ctx)'});
+  const ty=k%2?215:165,cx=k?x+w/2:x+2,anc=k?'middle':'start';
+  mk(svg,'line',{x1:x+w/2,x2:x+w/2,y1:124,y2:ty-20,stroke:'var(--ctx)'});
+  mk(svg,'text',{x:cx,y:ty,'font-size':17,fill:'var(--ink)','text-anchor':anc,'font-weight':s[2]?700:400},s[0]);
+  mk(svg,'text',{x:cx,y:ty+20,'font-size':15,fill:s[2]?'var(--acc)':'var(--mut)','text-anchor':anc,'font-weight':s[2]?700:400},'$'+s[1].toFixed(2));
+  const h=mk(svg,'rect',{x:x,y:30,width:w,height:90,fill:'transparent'});h.addEventListener('mousemove',e=>showTip(e,`<b>${s[0]}: $${s[1].toFixed(2)}</b><br>${(s[1]/8*100).toFixed(0)}% of $8<br>${s[3]}`));h.addEventListener('mouseleave',hideTip);
+  x+=w;});
+ mk(svg,'text',{x:0,y:18,'font-size':12,fill:'var(--mut)'},'$0');mk(svg,'text',{x:W,y:18,'font-size':12,fill:'var(--mut)','text-anchor':'end'},'$8.00');
+}
+const YEAR=[["Antonio","$30–40 a week, about daily",1820,135],["Valentina","$20–30 a week, almost daily",1300,135],["Emilia","about $20 a week, 4 times a week",1040,77]];
+function yearChart(id){
+ const svg=document.getElementById(id),W=1000,rowH=80,L=230,R=230,H=rowH*3,max=2000;svg.setAttribute('viewBox',`0 0 ${W} ${H}`);const x=v=>L+(W-L-R)*v/max;
+ YEAR.forEach((r,i)=>{const y=i*rowH;mk(svg,'text',{x:0,y:y+30,'font-size':19,'font-weight':700,fill:'var(--ink)'},r[0]);mk(svg,'text',{x:0,y:y+50,'font-size':12,fill:'var(--mut)'},r[1]);
+  mk(svg,'rect',{x:L,y:y+10,width:x(r[2])-L,height:42,rx:4,fill:'var(--ctx)'});mk(svg,'rect',{x:L,y:y+10,width:x(r[3])-L,height:42,rx:4,fill:'var(--acc)'});
+  mk(svg,'text',{x:x(r[2])+12,y:y+28,'font-size':19,'font-weight':700,fill:'var(--ink)'},'≈ $'+r[2].toLocaleString()+' a year');mk(svg,'text',{x:x(r[2])+12,y:y+50,'font-size':15,fill:'var(--acc)'},'≈ $'+r[3]+' of it is beans');
+  const h=mk(svg,'rect',{x:0,y:y,width:W,height:rowH,fill:'transparent'});h.addEventListener('mousemove',e=>showTip(e,`<b>${r[0]}</b><br>${r[1]}<br>≈ $${r[2].toLocaleString()} a year (middle of range × 52)<br>beans: cups/week × 52 × 37¢`));h.addEventListener('mouseleave',hideTip);});
+ mk(svg,'line',{x1:L,x2:L,y1:0,y2:H,stroke:'var(--ink)'});
+}
+lineChart('line');barChart('rise',RISE,0);splitChart('split');yearChart('year');</script></body></html>
